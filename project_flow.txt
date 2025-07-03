@@ -1,0 +1,63 @@
+1. Create repo, clone it in local
+2. Create a virtual environment named 'AirFlow' - conda create -n airflowproj python=3.9
+3. Activate the virtual environment - conda activate airflowproj
+4. copy the provided requirements.txt file and do "pip install -r requirements.txt"
+5. Create these folders -> dags, logs, plugins, config
+6. Start docker-desktop (check "docker --version" & "docker-compose --version") & add dockerfile
+
+7. Check latest apache airflow releases and accordingly download the docker-compose.yaml file -
+                                ***Bash Command***
+   curl -LfO 'https://airflow.apache.org/docs/apache-airflow/3.0.1/docker-compose.yaml'
+                                ***Powershell Command***
+   Invoke-WebRequest -Uri 'https://airflow.apache.org/docs/apache-airflow/2.10.5/docker-compose.yaml' -OutFile 'docker-compose.yaml'
+
+8. Windows users -> Instead of following step7, use the provided 'docker-compose.yaml' file 
+9. On terminal - "docker-compose up -d"
+   This will:
+    >> Download all required images
+    >> Initialize the database
+    >> Create an admin user (username: admin, password: admin)
+    >> Start all Airflow services
+
+10. (Wait few minutes before proceeding) Access Airflow Web UI ->
+    >> Open your web browser and go to: http://localhost:8080
+    >> Login with: Username: admin, Password: admin
+
+11. Common Commands ->
+    >> Stop Airflow: docker-compose down
+    >> Restart Airflow: docker-compose down && docker-compose up -d
+    >> View logs: docker-compose logs -f
+    >> Check running containers: docker ps
+
+This setup gives you a complete Airflow environment with:
+    >> PostgreSQL as the metadata database
+    >> Redis as the message broker
+    >> CeleryExecutor for parallel task execution
+    >> Web UI, scheduler, and worker services
+
+12. Add "my_first_dag" & "my_second_dag" sequentially inside .dags/ and run them from AirFlow UI
+
+Key Features Demonstrated:
+    >> Passing data between tasks using XCom
+    >> Parallel task execution
+    >> Python calculations and transformations
+    >> Detailed logging output
+    >> Task dependencies
+    >> Error handling (automatic retries)
+
+
+13. Building ML-Pipeline:
+    add dags/ml_pipeline_dag.py
+    Also, inside dags/ create scripts/ and add load_data.py, train_model.py, save_model.py, __init__.py
+    Create models/ at root level
+
+🧠 Concepts Covered:
+    >> DAG and Task flow
+    >> PythonOperator
+    >> Dependency management using >>
+    >> Logging
+    >> Model training orchestration
+    >> Cron scheduling (daily)
+
+
+
